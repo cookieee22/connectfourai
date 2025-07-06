@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f2f2f2;
+}
+
+#game {
+  display: grid;
+  grid-template-columns: repeat(7, 80px);
+  grid-template-rows: repeat(6, 80px);
+  gap: 5px;
+  margin: 20px auto;
+  width: fit-content;
+  background: #0077b6;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.cell {
+  width: 80px;
+  height: 80px;
+  background: #f2f2f2;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.red {
+  background: red;
+}
+
+.yellow {
+  background: gold;
+}
+
+#status {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+button#restart {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
