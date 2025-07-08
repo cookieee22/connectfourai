@@ -158,13 +158,13 @@ function getOpenRow(board, col) {
 }
 
 //Score Window layout//
-function scoreWindow(window, playerPiece, aiPiece) {
-  let score = 0;
-  const opponent = playerPiece !== aiPiece ? playerPiece : "0";
+// function scoreWindow(window, playerPiece, aiPiece) {
+//  let score = 0;
+//  const opponent = playerPiece !== aiPiece ? playerPiece : "0";
   
-  const aiCount = window.filter(cell => cell === aiPiece).length;
-  const opponentCount = window.filter
-}
+//  const aiCount = window.filter(cell => cell === aiPiece).length;
+//  const opponentCount = window.filter
+//}
 
 function evaluateBoard(board, piece) {
   let score = 0;
