@@ -188,7 +188,7 @@ function evaluateBoard(board, piece) {
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS - 3; c++) {
       const window = board[r].slice(c, c + 4);
-      score += scoreWindow(window, piece);
+      score += scoreWindow(window, PLAYER, AI);
     }
   }
 
@@ -200,7 +200,7 @@ function evaluateBoard(board, piece) {
         board[r+2][c],
         board[r+3][c]
       ];
-      score += scoreWindow(window, piece);
+      score += scoreWindow(window, PLAYER, AI);
     }
   }
 
@@ -212,7 +212,7 @@ function evaluateBoard(board, piece) {
         board[r-2][c+2],
         board[r-3][c+3]
       ];
-      score += scoreWindow(window, piece);
+      score += scoreWindow(window, PLAYER, AI);
     }
   }
 
@@ -224,7 +224,7 @@ function evaluateBoard(board, piece) {
         board[r+2][c+2],
         board[r+3][c+3]
       ];
-      score += scoreWindow(window, piece);
+      score += scoreWindow(window, PLAYER, AI);
     }
   }
 
