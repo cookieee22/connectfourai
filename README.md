@@ -8,7 +8,7 @@ Now you can play Connect Four right in the browser — against an AI that actual
 
 ## 🔗 Link
 
- https://cookieee22.github.io/connectfourai/
+https://cookieee22.github.io/connectfourai/
 
 ## Features
 
