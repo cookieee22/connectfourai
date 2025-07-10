@@ -8,6 +8,11 @@ let board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
 let currentPlayer = PLAYER;
 let gameOver = false;
 let winningCells = [];
+let humanScore = 0;
+let aiScore = 0;
+
+const humanScoreEl = document.getElementById("humanScore");
+const aiScoreEl = document.getElementById("aiScore");
 
 const gameDiv = document.getElementById("game");
 const statusDiv = document.getElementById("status");
@@ -15,6 +20,7 @@ const restartBtn = document.getElementById("restart");
 
 restartBtn.addEventListener("click", resetGame);
 
+/** feature that resets the game **/
 function resetGame() {
   board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
   currentPlayer = PLAYER;
@@ -22,6 +28,12 @@ function resetGame() {
   winningCells = [];
   statusDiv.textContent = "";
   drawBoard();
+}
+
+/** score update **/
+function updateScores() {
+  humanScoreEl.textContent = humanScore;
+  aiScoreEl.textContent = aiScore;
 }
 
 function drawBoard() {
@@ -50,6 +62,8 @@ function handleClick(col) {
       if (isWinningMove(board, PLAYER)) {
         statusDiv.textContent = "You win!";
         gameOver = true;
+        humanScore++;   /**incrementing value **/
+        updateScores();  /** call feature :) **/
       } else {
         currentPlayer = AI;
         drawBoard();
@@ -73,6 +87,8 @@ function aiMove() {
       if (isWinningMove(board, AI)) {
         statusDiv.textContent = "AI wins!";
         gameOver = true;
+        aiScore++;
+        updateScores(); /**added two features for the scoreboard to both handleclick and aimove functions **/
       } else {
         currentPlayer = PLAYER;
       }
@@ -280,3 +296,4 @@ function minimax(board, depth, alpha, beta, maximizing) {
 }
 
 drawBoard();
+updateScores(); /**call added here to intialize scoreb on page load **/

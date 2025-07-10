@@ -4,6 +4,35 @@ body {
   background: #f2f2f2;
 }
 
+/** Scoreboard **/
+.score-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.player-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-value {
+  font-size: 28px;
+  color: #0077b6;
+  margin-top: 5px;
+}
+
+.label {
+  font-size: 16px;
+  color: #555;
+}
+
+/** Game Board **/
 #game {
   display: grid;
   grid-template-columns: repeat(7, 80px);
@@ -36,14 +65,25 @@ body {
   background: gold;
 }
 
+/** Game Status **/
 #status {
   font-size: 20px;
   margin-top: 20px;
 }
 
+/** Restart Button **/
 button#restart {
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #0077b6;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button#restart:hover {
+  background-color: #005f8a;
 }
