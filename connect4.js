@@ -20,7 +20,7 @@ const restartBtn = document.getElementById("restart");
 
 restartBtn.addEventListener("click", resetGame);
 
-/** feature that resets the game or plays again**/
+/** feature that resets the game**/
 function resetGame() {
   board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
   currentPlayer = PLAYER;

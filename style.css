@@ -119,3 +119,10 @@ button#resetAll:hover {
   background-color: #005f8a;
 }
 
+/* Game Logo */
+.game-logo {
+  width: 120px;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
