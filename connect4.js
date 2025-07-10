@@ -20,7 +20,7 @@ const restartBtn = document.getElementById("restart");
 
 restartBtn.addEventListener("click", resetGame);
 
-/** feature that resets the game **/
+/** feature that resets the game or plays again**/
 function resetGame() {
   board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
   currentPlayer = PLAYER;
@@ -28,6 +28,19 @@ function resetGame() {
   winningCells = [];
   statusDiv.textContent = "";
   drawBoard();
+}
+
+/** this feature resets both the board and the scores**/
+const resetAllBtn = document.getElementById("resetAll");
+
+resetAllBtn.addEventListener("click", resetAll);
+
+/** Reset the entire game including scores **/
+function resetAll() {
+  humanScore = 0;
+  aiScore = 0;
+  updateScores();     // Reset score display
+  resetGame();        // Reset the board
 }
 
 /** score update **/
