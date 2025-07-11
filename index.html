@@ -4,37 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connect Four</title>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Favicon -->
+  <!--favicon -->
   <link rel="icon" type="images/Favicon.png" href="images/Favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Logo -->
+  <!--logo -->
   <img src="images/Connect4-Logo.png" alt="Connect Four Logo" class="game-logo" />
   <h1>Connect Four</h1>
+  <!--theme feature added-->
+<div id="theme-toggle" class="theme-toggle">
+  <img id="theme-icon" src="images/sun.png" alt="Toggle Theme" />
+</div>
 
-  <!-- Score Container -->
-  <div class="score-container">
-    <div class="player-score">
-      <span class="label">Human</span>
-      <span id="humanScore" class="score-value">0</span>
-    </div>
-    <div class="player-score">
-      <span class="label">AI</span>
-      <span id="aiScore" class="score-value">0</span>
+  <!--score container -->
+<div class="game-header">
+  <div class="player-card">
+    <span class="avatar">🙂</span>
+    <div class="details">
+      <div class="name">Human</div>
+      <div class="score-label"></div>
+      <div class="score-value" id="humanScore">0</div>
     </div>
   </div>
 
-  <div id="game"></div>
-  <div id="status"></div>
+  <div class="score-separator">vs</div>
+  <div class="player-card">
+    <span class="avatar">🤖</span>
+    <div class="details">
+      <div class="name">AI</div>
+      <div class="score-label"></div>
+      <div class="score-value" id="aiScore">0</div>
+    </div>
+  </div>
+</div>
 
-  <!-- Game Control -->
+ <div id="game"></div>
+
+  <!--game control -->
   <div class="button-container">
     <button id="restart">Play Again!</button>
     <button id="resetAll">Reset All</button>
   </div>
 
   <script src="connect4.js"></script>
+
 </body>
 </html>

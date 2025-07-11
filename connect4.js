@@ -10,6 +10,7 @@ let gameOver = false;
 let winningCells = [];
 let humanScore = 0;
 let aiScore = 0;
+let boardEnabled = true;
 
 const humanScoreEl = document.getElementById("humanScore");
 const aiScoreEl = document.getElementById("aiScore");
@@ -28,6 +29,7 @@ function resetGame() {
   winningCells = [];
   statusDiv.textContent = "";
   drawBoard();
+  enableBoard(); //allows user to play right after reset
 }
 
 /** this feature resets both the board and the scores**/
@@ -35,7 +37,7 @@ const resetAllBtn = document.getElementById("resetAll");
 
 resetAllBtn.addEventListener("click", resetAll);
 
-/** Reset the entire game including scores **/
+// Reset the entire game including scores
 function resetAll() {
   humanScore = 0;
   aiScore = 0;
@@ -43,10 +45,66 @@ function resetAll() {
   resetGame();        // Reset the board
 }
 
-/** score update **/
+// score update
 function updateScores() {
   humanScoreEl.textContent = humanScore;
   aiScoreEl.textContent = aiScore;
+}
+
+// Disc Drop feature
+function animateDiscDrop(col, row, player) {
+  disableBoard(); // prevent clicks during animation
+
+  const disc = document.createElement("div");
+  disc.classList.add("disc", player === PLAYER ? "red" : "yellow");
+
+  const cellSize = 80;
+  const cellGap = 5;
+  const containerPadding = 5;
+
+  disc.style.top = "-90px";
+  disc.style.left = `${containerPadding + col * (cellSize + cellGap)}px`;
+  gameDiv.appendChild(disc);
+
+  void disc.offsetHeight; // force reflow
+  disc.style.top = `${containerPadding + row * (cellSize + cellGap)}px`;
+
+  setTimeout(() => {
+    board[row][col] = player;
+
+    if (isWinningMove(board, player)) {
+      statusDiv.textContent = player === PLAYER ? "You win!" : "AI wins!";
+      gameOver = true;
+      if (player === PLAYER) humanScore++;
+      else aiScore++;
+      updateScores();
+      drawBoard(); // Draw winning state
+    } else {
+      currentPlayer = player === PLAYER ? AI : PLAYER;
+      drawBoard();
+
+      if (currentPlayer === AI) {
+        setTimeout(aiMove, 300);
+      } else {
+        enableBoard(); // re-enable for human move
+      }
+    }
+
+    gameDiv.removeChild(disc);
+  }, 400);
+}
+
+
+function disableBoard() {
+  boardEnabled = false;
+  gameDiv.classList.add("disabled");
+}
+
+function enableBoard() {
+  boardEnabled = true;
+  if (!gameOver && currentPlayer === PLAYER) {
+    gameDiv.classList.remove("disabled");
+  }
 }
 
 function drawBoard() {
@@ -64,28 +122,25 @@ function drawBoard() {
       gameDiv.appendChild(cell);
     }
   }
+
+  //re-apply disabled styling if board is disabled
+  if (!boardEnabled) {
+    gameDiv.classList.add("disabled");
+  } else {
+    gameDiv.classList.remove("disabled");
+  }
 }
 
+
 function handleClick(col) {
-  if (gameOver) return;
+  if (gameOver || !boardEnabled || currentPlayer !== PLAYER) return;
 
   for (let r = ROWS - 1; r >= 0; r--) {
     if (board[r][col] === EMPTY) {
-      board[r][col] = PLAYER;
-      if (isWinningMove(board, PLAYER)) {
-        statusDiv.textContent = "You win!";
-        gameOver = true;
-        humanScore++;   /**incrementing value **/
-        updateScores();  /** call feature :) **/
-      } else {
-        currentPlayer = AI;
-        drawBoard();
-        setTimeout(aiMove, 300);
-      }
+      animateDiscDrop(col, r, PLAYER);
       break;
     }
   }
-  drawBoard();
 }
 
 function aiMove() {
@@ -96,19 +151,10 @@ function aiMove() {
 
   for (let r = ROWS - 1; r >= 0; r--) {
     if (board[r][col] === EMPTY) {
-      board[r][col] = AI;
-      if (isWinningMove(board, AI)) {
-        statusDiv.textContent = "AI wins!";
-        gameOver = true;
-        aiScore++;
-        updateScores(); /**added two features for the scoreboard to both handleclick and aimove functions **/
-      } else {
-        currentPlayer = PLAYER;
-      }
+      animateDiscDrop(col, r, AI);
       break;
     }
   }
-  drawBoard();
 }
 
 function isWinningMove(board, piece) {
@@ -308,5 +354,22 @@ function minimax(board, depth, alpha, beta, maximizing) {
   }
 }
 
+const themeToggleDiv = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+
+themeToggleDiv.addEventListener("click", () => {
+  document.body.classList.toggle("dark-theme");
+
+  // Swap icons
+  if (document.body.classList.contains("dark-theme")) {
+    themeIcon.src = "images/full-moon.png";  // Dark theme icon
+    themeIcon.alt = "Switch to Light Theme";
+  } else {
+    themeIcon.src = "images/sun.png";        // Light theme icon
+    themeIcon.alt = "Switch to Dark Theme";
+  }
+});
+
 drawBoard();
 updateScores(); /**call added here to intialize scoreb on page load **/
+enableBoard();
