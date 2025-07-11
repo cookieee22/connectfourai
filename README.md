@@ -6,16 +6,11 @@ Later, I wanted to make it more playable, so I challenged myself to rebuild it u
 
 Now you can play Connect Four right in the browser — against an AI that actually thinks!
 
-## 🔗 Link
-
-https://cookieee22.github.io/connectfourai/
-
 ## Features
 
 - Minimax algorithm with Alpha-Beta Pruning
 - Clickable grid interface
 - Winning move detection (with highlighted pieces)
-- Restart button
 - Responsive layout
 
 ## Languages
@@ -23,11 +18,3 @@ https://cookieee22.github.io/connectfourai/
 - JavaScript
 - HTML & CSS
 - GitHub
-
-## Future Updates
-
-- Scoreboard
-- Difficulty levels
-- Two-player mode
-- Animation
-- Mobile-friendly
