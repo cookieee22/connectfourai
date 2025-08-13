@@ -9,7 +9,7 @@
 
 body.dark-theme {
   --bg-color: #223344;
-  --text-color: white;
+  --text-color: #223344;
   --board-bg: #2a3b4c;
   --cell-border: #444;
   --score-color: #f9ca24;
@@ -175,7 +175,7 @@ button#resetAll:hover {
 }
 
 /* game settings when the opponent plays */
-.disabled {
+#game.disabled {
   pointer-events: none;
 }
 
@@ -183,8 +183,6 @@ body, button, h1, .score-container {
   font-family: 'Poppins', sans-serif;
   margin-top: 5px;
 }
-
-
 
 /* Theme Toggle Switch */
 .theme-toggle {

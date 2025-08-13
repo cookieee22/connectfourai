@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 const ROWS = 6;
 const COLS = 7;
 const PLAYER = 1;
@@ -91,6 +92,10 @@ function animateDiscDrop(col, row, player) {
     }
 
     gameDiv.removeChild(disc);
+
+    if (!gameOver && currentPlayer === PLAYER) {
+      enableBoard();
+    }
   }, 400);
 }
 
@@ -313,11 +318,21 @@ function minimax(board, depth, alpha, beta, maximizing) {
     isWinningMove(board, AI) ||
     validMoves.length === 0;
 
-  if (depth === 0 || isTerminal) {
-    if (isWinningMove(board, AI)) return [null, 1000000];
-    if (isWinningMove(board, PLAYER)) return [null, -1000000];
-    return [null, evaluateBoard(board, AI)];
+ if (depth === 0 || isTerminal) {
+  const prevWinning = [...winningCells];
+
+  let result;
+  if (isWinningMove(board, AI)) {
+    result = [null, 1000000];
+  } else if (isWinningMove(board, PLAYER)) {
+    result = [null, -1000000];
+  } else {
+    result = [null, evaluateBoard(board, AI)];
   }
+
+  winningCells = prevWinning;
+  return result;
+}
 
   if (maximizing) {
     let bestScore = -Infinity;
@@ -373,3 +388,4 @@ themeToggleDiv.addEventListener("click", () => {
 drawBoard();
 updateScores(); /**call added here to intialize scoreb on page load **/
 enableBoard();
+}); // End of DOMContentLoaded
